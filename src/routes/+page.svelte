@@ -1,13 +1,26 @@
 <script lang="ts">
 	import { createMutation } from '@tanstack/svelte-query';
+	import type { ChatCompletionRequestMessage, ChatCompletionRequestMessageRoleEnum } from 'openai';
 	import openai from '../lib/openai';
 
 	let prompt = '';
-	let messages: Array<string | undefined> = [];
+	let messages: Array<ChatCompletionRequestMessage> = [];
 
 	const setCompletion = async (prompt: string) => {
-		const res = openai.createCompletion({ model: 'text-davinci-003', prompt });
-		messages = [...messages, (await res).data.choices[0].text];
+		const res = openai.createChatCompletion({
+			model: 'gpt-3.5-turbo',
+			messages: [...messages, { role: 'user', content: prompt }]
+		});
+		const message = (await res).data.choices[0].message;
+		console.log(message);
+
+		messages = [
+			...messages,
+			{
+				role: message?.role as ChatCompletionRequestMessageRoleEnum,
+				content: String(message?.content)
+			}
+		];
 	};
 
 	const mutation = createMutation({
@@ -16,7 +29,7 @@
 	});
 
 	const addPrompt = () => {
-		messages = [...messages, prompt];
+		messages = [...messages, { role: 'user', content: prompt }];
 		$mutation.mutate(prompt);
 		prompt = '';
 	};
@@ -27,7 +40,7 @@
 		{#if messages}
 			{#each messages as message}
 				<div class="chat-bubble">
-					{message}
+					{message.content}
 				</div>
 			{/each}
 		{/if}
