@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>Svelte Query Star Wars Example</title>
+	<title>AI Chat</title>
 	<style>
 		html,
 		body {
