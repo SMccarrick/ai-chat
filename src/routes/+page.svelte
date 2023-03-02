@@ -85,6 +85,7 @@
 	}
 
 	div.chat-bubble:nth-of-type(2n) {
+		white-space: pre-line;
 		position: relative;
 		display: inline-block;
 		background-color: #e0e0e0;
@@ -99,6 +100,7 @@
 	}
 
 	div.chat-bubble:nth-of-type(2n + 1) {
+		white-space: pre-line;
 		position: relative;
 		display: inline-block;
 		padding: 8px 12px;
