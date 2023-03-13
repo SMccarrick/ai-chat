@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { createMutation } from '@tanstack/svelte-query';
-	import type { ChatCompletionRequestMessage, ChatCompletionRequestMessageRoleEnum } from 'openai';
+	import type { ChatCompletionResponseMessage } from 'openai';
 	import openai from '../lib/openai';
 
 	let prompt = '';
-	let messages: Array<ChatCompletionRequestMessage> = [];
+	let messages: Array<ChatCompletionResponseMessage> = [];
 
 	const setCompletion = async (prompt: string) => {
 		const res = openai.createChatCompletion({
 			model: 'gpt-3.5-turbo',
 			messages: [...messages, { role: 'user', content: prompt }]
 		});
-		const message = (await res).data.choices[0].message;
-		console.log(message);
+		const message = (await res).data.choices[0].message || { role: 'assistant', content: '' };
 
 		messages = [
 			...messages,
 			{
-				role: message?.role as ChatCompletionRequestMessageRoleEnum,
-				content: String(message?.content)
+				role: message.role,
+				content: message.content.trim()
 			}
 		];
 	};
@@ -46,7 +45,8 @@
 		{/if}
 	</article>
 	<div class="push" />
-	<form class="form-container" on:submit|preventDefault={addPrompt}>
+
+	<form class="container form-container" on:submit|preventDefault={addPrompt}>
 		<textarea class="input" name="prompt" placeholder="enter prompt here" bind:value={prompt} />
 		<button class="button" type="submit">Ask</button>
 	</form>
