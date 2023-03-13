@@ -8,11 +8,11 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    backgroundColor: { control: 'color' },
-    size: {
-      control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
-    },
+    // backgroundColor: { control: 'color' },
+    // size: {
+    //   control: { type: 'select' },
+    //   options: ['small', 'medium', 'large'],
+    // },
   },
 } satisfies Meta<Button>;
 
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/7.0/svelte/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
+    // primary: true,
     label: 'Button',
   },
 };
@@ -35,14 +35,14 @@ export const Secondary: Story = {
 
 export const Large: Story = {
   args: {
-    size: 'large',
+    // size: 'large',
     label: 'Button',
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    // size: 'small',
     label: 'Button',
   },
 };

@@ -2,6 +2,7 @@
 	import { createMutation } from '@tanstack/svelte-query';
 	import type { ChatCompletionResponseMessage } from 'openai';
 	import openai from '../lib/openai';
+	import Button from '../components/button/Button.svelte';
 
 	let prompt = '';
 	let messages: Array<ChatCompletionResponseMessage> = [];
@@ -49,6 +50,7 @@
 	<form class="container form-container" on:submit|preventDefault={addPrompt}>
 		<textarea class="input" name="prompt" placeholder="enter prompt here" bind:value={prompt} />
 		<button class="button" type="submit">Ask</button>
+		<Button label="label" />
 	</form>
 </div>
 
