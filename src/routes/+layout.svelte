@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '@picocss/pico/css/pico.css';
 	import { browser } from '$app/environment';
 	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
 
