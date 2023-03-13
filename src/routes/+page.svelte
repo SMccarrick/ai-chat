@@ -93,7 +93,7 @@
 		padding: 8px 12px;
 		border-radius: 18px;
 		max-width: 75%;
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 1.4;
 		margin-bottom: 10px;
 		width: fit-content;
@@ -106,7 +106,7 @@
 		padding: 8px 12px;
 		border-radius: 18px;
 		width: fit-content;
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 1.4;
 		margin-bottom: 10px;
 		background-color: #007aff;
