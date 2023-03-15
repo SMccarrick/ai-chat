@@ -47,6 +47,7 @@
   "type": "module",
   "dependencies": {
     "@picocss/pico": "^1.5.7",
+    "@radix-ui/colors": "^0.1.8",
     "@sveltejs/adapter-static": "1.0.0-next.50",
     "@tanstack/svelte-query": "^4.24.4",
     "@vanilla-extract/css": "^1.10.0",
