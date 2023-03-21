@@ -3,9 +3,11 @@ import { style } from "@vanilla-extract/css";
 
 // Define your styles using Vanilla Extract
 export const button = style({
+  ...vars.tokens.textStyles.p,
   backgroundColor: vars.colors.uiElement.background,
   color: vars.colors.text,
   padding: '8px 16px',
+  height: "4.8rem",
   borderRadius: '4px',
   border: "solid 1px",
   borderColor: vars.colors.uiElement.border,
