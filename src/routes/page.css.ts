@@ -24,7 +24,8 @@ export const containerStyle = style({
 // TODO: populate with conversations from one session
 export const sidebar = style({
 	backgroundColor: vars.colors.background,
-	gridArea: 'sidebar'
+	gridArea: 'sidebar',
+	padding: vars.tokens.spacing.sm
 });
 
 // TODO: add a toggle button that shows a modal
@@ -44,7 +45,8 @@ export const conversationStyle = style({
 	gridArea: 'conversation',
 	display: 'flex',
 	flexDirection: 'column',
-	padding: vars.tokens.spacing.sm
+	padding: vars.tokens.spacing.sm,
+	gap: vars.tokens.spacing.xs
 });
 
 export const formContainerStyle = style({
@@ -52,23 +54,36 @@ export const formContainerStyle = style({
 	gridArea: 'prompt',
 	width: '100%',
 	display: 'flex',
-	flexDirection: 'row',
+	flexDirection: 'column',
 	alignContent: 'space-between',
 	gap: vars.tokens.spacing.xs,
-	padding: vars.tokens.spacing.sm
+	padding: vars.tokens.spacing.xs,
+	'@media': {
+		[QUERIES.tabletAndUp]: {
+			flexDirection: 'row',
+		}
+	}
 });
 
 export const inputStyle = style({
 	...vars.tokens.textStyles.p,
 	padding: vars.tokens.spacing.xs,
 	height: "4.8rem",
-	width: '48rem'
+	maxWidth: '68rem',
+	width: "100%",
 });
 
 export const formButtonsStyle = style({
+	width: "100%",
+	maxWidth: "20rem",
 	display: "flex",
-	flexDirection: "row",
+	flexDirection: "row-reverse",
 	gap: vars.tokens.spacing.xs,
+	'@media': {
+		[QUERIES.tabletAndUp]: {
+			flexDirection: 'row',
+		}
+	},
 });
 
 const chatBubbleBase: ComplexStyleRule = {

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { createMutation } from '@tanstack/svelte-query';
 	import type { ChatCompletionResponseMessage } from 'openai';
-	import openai from '../lib/openai';
 	import Button from '../components/button/Button.svelte';
 	import {
 		chatBubbleStyles,
@@ -12,17 +10,21 @@
 		formContainerStyle,
 		inputStyle,
 		sidebar
-	} from './layout.css';
+	} from './page.css';
+	import { createMutation } from '@tanstack/svelte-query';
+	import openai from '../lib/openai';
 
 	let prompt = '';
 	let messages: Array<ChatCompletionResponseMessage> = [];
 
-	const setCompletion = async (prompt: string) => {
-		const res = openai.createChatCompletion({
+	const setPrompt = async (prompt: string) => {
+		const response = await openai.createChatCompletion({
 			model: 'gpt-3.5-turbo',
 			messages: [...messages, { role: 'user', content: prompt }]
 		});
-		const message = (await res).data.choices[0].message || { role: 'assistant', content: '' };
+
+		const { data } = response;
+		const message = data.choices[0].message || { role: 'assistant', content: '' };
 
 		messages = [
 			...messages,
@@ -33,21 +35,24 @@
 		];
 	};
 
-	const mutation = createMutation({
+	export const setPromptMutation = createMutation({
 		mutationKey: ['setPrompt'],
-		mutationFn: setCompletion
+		mutationFn: setPrompt
 	});
 
 	const addPrompt = () => {
+		if (!prompt) {
+			return;
+		}
 		messages = [...messages, { role: 'user', content: prompt }];
-		$mutation.mutate(prompt);
+		$setPromptMutation.mutate(prompt);
 		prompt = '';
 	};
 </script>
 
 <main class={containerStyle}>
 	<div class={sidebar}>
-		<p>Sidebar</p>
+		<Button label="new conversation" />
 	</div>
 	<div class={conversationContainer}>
 		<article class={conversationStyle}>
@@ -60,11 +65,11 @@
 			{/if}
 		</article>
 
-		<form class={formContainerStyle} on:submit|preventDefault={addPrompt}>
+		<form class={formContainerStyle} method="post" on:submit|preventDefault={addPrompt}>
 			<input class={inputStyle} name="prompt" placeholder="enter prompt here" bind:value={prompt} />
 			<div class={formButtonsStyle}>
 				<Button type="submit" label="Ask" />
-				<Button label="Amend filters" />
+				<Button label="Add filters" />
 			</div>
 		</form>
 	</div>
