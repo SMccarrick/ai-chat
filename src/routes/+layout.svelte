@@ -13,13 +13,6 @@
 
 <svelte:head>
 	<title>AI Chat</title>
-	<style>
-		html,
-		body {
-			height: 100%;
-			margin: 0;
-		}
-	</style>
 </svelte:head>
 
 <QueryClientProvider client={queryClient}>
