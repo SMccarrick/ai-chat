@@ -1,8 +1,9 @@
 import { Configuration, OpenAIApi } from "openai";
-import { env } from '$env/dynamic/public';
+import { PRIVATE_OPENAI_API_KEY } from '$env/static/private';
+
 const configuration = new Configuration({
     organization: "org-xoXZGnQOkRKGq7Xh8vUC89sX",
-    apiKey: env.PUBLIC_OPENAI_API_KEY,
+    apiKey: PRIVATE_OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 export default openai;
